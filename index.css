@@ -1,0 +1,244 @@
+/* Добавляем шрифт для заголовка*/
+@font-face {
+    font-family: 'COCOMAT-UltraLight';
+    src: url('COCOMAT-UltraLight.ttf.woff') format('woff'),
+    url('COCOMAT-UltraLight.ttf.svg#COCOMAT-UltraLight') format('svg'),
+    url('COCOMAT-UltraLight.ttf.eot'),
+    url('COCOMAT-UltraLight.ttf.eot?#iefix') format('embedded-opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+h1 {
+    text-align: center;
+    font-size: 185px;
+    font-weight: lighter;
+    font-family: "COCOMAT-UltraLight";
+    text-transform: lowercase;
+    color: #ead7d7;
+    margin: 0 auto;
+
+}
+
+.body {
+    margin: 0 150px 150px 150px;
+    width: 1100px;
+    background: #ffffff;
+    border-bottom: 1px solid rgb(194, 192, 184);
+
+    box-shadow: 0 5px 3px -4px rgba(0, 0, 0, .2),
+    0 10px 0 -4px rgb(255, 255, 255),
+    0 10px 0 -3px rgb(194, 192, 184),
+    0 15px 3px -14px rgba(0, 0, 0, .2),
+    0 21px 0 -8px rgb(255, 255, 255),
+    0 21px 0 -7px rgb(194, 192, 184),
+    0 32px 0 -12px rgb(255, 255, 255),
+    0 32px 0 -11px rgb(194, 192, 184),
+    0 0 9px rgb(194, 192, 184);;
+}
+
+form {
+    box-shadow: 0 -4px 4px #f7f7f7 inset;
+    border-bottom: 1px solid #e6e6e6;
+    width: 1100px;
+    height: 130px;
+}
+
+#input_section {
+    font-style: italic;
+    border: 0;
+    color: #e6e6e6;
+    margin: 2px auto;
+    width: 950px;
+    padding: 35px 0 30px 30px;
+    font-weight: 100;
+    font-size: 45px;
+    font-family: Verdana;
+}
+
+#input_section:focus {
+    color: #4d4d4d;
+}
+
+.main {
+
+    width: 1400px;
+    background: #f5f5f5;
+    margin: 0 auto;
+    border: solid black 1px;
+}
+
+ul {
+    margin: 0 auto;
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    box-shadow: 0 -4px 4px #f7f7f7 inset;
+    border-bottom: 1px solid #e6e6e6;
+    width: 1100px;
+    min-height: 130px;;
+
+}
+
+.label {
+    width: 850px;
+    padding: 35px 0 30px 30px;
+    color: #4d4d4d;
+    font-size: 45px;
+    font-family: Verdana;
+    word-break: break-all;
+
+}
+
+.label-complite {
+    color: #e6e6e6;
+    font-style: italic;
+    text-decoration: line-through;
+}
+
+.checkbox {
+    display: none;
+}
+
+
+.checkbox-custom {
+    margin: 0 0 0 20px;
+    position: relative; /* Обязательно задаем, чтобы мы могли абсолютным образом позиционировать псевдоэлемент внютри нашего кастомного чекбокса */
+    width: 62px; /* Обязательно задаем ширину */
+    height: 62px; /* Обязательно задаем высоту */
+    border: 2px solid #ccc;
+    border-radius: 31px;
+}
+
+.checkbox-custom,
+.label {
+
+    display: inline-block;
+    vertical-align: middle;
+
+}
+
+/* Если реальный чекбокс у нас отмечен, то тогда добавляем данный признак и к нашему кастомному чекбоксу  */
+.checkbox:checked + .checkbox-custom::before {
+    content: ""; /* Добавляем наш псевдоэлемент */
+    display: block; /* Делаем его блочным элементом */
+    position: absolute; /* Позиционируем его абсолютным образом */
+
+    /* Задаем расстояние от верхней, правой, нижней и левой границы */
+    top: 2px;
+    right: 2px;
+    bottom: 2px;
+    left: 2px;
+
+    background: url("im/check4.png") no-repeat; /* Добавляем фон. */
+    border-radius: 2px;
+}
+
+.checkbox:checked + .checkbox-custom {
+    border-color: #c4ddd9;
+}
+
+#menu {
+    width: 100%;
+    height: 50px;
+    padding: 14px 0 16px 0;
+    color: #939393;
+    font-size: 25px;
+    font-family: Verdana;
+    font-weight: lighter;
+
+}
+
+.count {
+    height: 42px;
+    padding: 8px 13px 0 13px;
+    vertical-align: middle;
+    margin: 0 0 0 30px;
+    float: left;
+
+}
+
+.button_activ {
+    height: 42px;
+    padding: 8px 13px 0 13px;
+    border: 2px solid;
+    border-color: #efd4d4;
+    border-radius: 6px;
+    float: right;
+    vertical-align: middle;
+    margin: 0 14px 0 14px;
+}
+
+.button {
+    height: 42px;
+    padding: 8px 13px 0 13px;
+    border: 2px solid;
+    border-color: #ffffff;
+    border-radius: 6px;
+    float: right;
+    vertical-align: middle;
+    margin: 0 14px 0 14px;
+}
+
+.button_clear {
+    height: 42px;
+    padding: 8px 13px 0 13px;
+    vertical-align: middle;
+    margin: 0 14px 0 110px;
+    float: right;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+input[type="button"] {
+    display: none;
+}
+
+input[type="radio"]:checked + .button {
+    border-color: #efd4d4;
+}
+
+.unvisible, .template {
+    display: none;
+}
+
+.del_item {
+    color: #e6e6e6;
+    font-size: 45px;
+    font-family: Verdana;
+    padding: 30px 40px 30px 40px;
+    float: right;
+    font-weight: bolder;
+}
+
+.del_item:hover {
+    color: #4d4d4d;
+}
+
+.sub_item {
+    color: #e6e6e6;
+    font-size: 45px;
+    font-family: Verdana;
+    padding: 30px 40px 30px 40px;
+    float: left;
+    font-weight: bolder;
+}
+
+.sub_item:hover, .sub_button:hover {
+    color: #4d4d4d;
+}
+
+.sub_button {
+    color: #e6e6e6;
+    font-size: 45px;
+    font-family: Verdana;
+    padding: 30px 35px 30px 35px;
+    float: left;
+    font-weight: bolder;
+    border: 0px;
+    background: none;
+}

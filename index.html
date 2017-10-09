@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>TODO</title>
+    <link href="index.css" rel="stylesheet" type="text/css"/>
+
+</head>
+<body>
+<script src="js.js"></script>
+<section class="main">
+    <h1>todos</h1>
+
+    <div class="body">
+        <form id="input_form" onsubmit="newTodo(); return false;">
+            <input type="submit" name="sub_item" class="sub_button" value="&#9013;">
+            <input type="text" id="input_section" placeholder="What need to be done?"/>
+
+        </form>
+        <ul>
+            <li class="template">
+                <label>
+                    <input class="checkbox" type="checkbox" name="checkbox-test">
+                    <span class="checkbox-custom"></span>
+                    <span class="label"></span>
+                </label>
+                <label>
+                    <input type="button" name="del_item">
+                    <span class="del_item">&#x2715;</span>
+                </label>
+            </li>
+            <li class="unvisible">
+                <label>
+                    <input class="checkbox" type="checkbox" name="checkbox-test" checked>
+                    <span class="checkbox-custom"></span>
+                    <span class="label">First task</span>
+                </label>
+                <label>
+                    <input type="button" name="del_item">
+                    <span class="del_item">&#x2715;</span>
+                </label>
+            </li>
+            <li class="unvisible">
+                <label>
+                    <input class="checkbox" type="checkbox" name="checkbox-test">
+                    <span class="checkbox-custom"></span>
+                    <span class="label">Second task</span>
+                </label>
+                <label>
+                    <input type="button" name="del_item">
+                    <span class="del_item">&#x2715;</span>
+                </label>
+
+            </li>
+        </ul>
+        <div id="menu">
+            <div class="count"> 1 items</div>
+            <label>
+                <input type="button" id="#button_clear">
+                <span class="button_clear">Clear complited</span>
+            </label>
+            <label>
+                <input name="menu" id="complited" type="radio" class="radiokbox">
+                <span class="button">Complited</span>
+            </label>
+            <label>
+                <input name="menu" id="active" type="radio" class="radiokbox">
+                <span class="button">Active</span>
+            </label>
+            <label>
+                <input name="menu" id="all" type="radio" class="radiokbox" checked>
+                <span class="button">All</span>
+            </label>
+
+        </div>
+    </div>
+</section>
+</body>
+</html>

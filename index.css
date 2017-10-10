@@ -13,7 +13,7 @@ h1 {
     text-align: center;
     font-size: 185px;
     font-weight: lighter;
-    font-family: "COCOMAT-UltraLight", sans ;
+    font-family: "COCOMAT-UltraLight", sans;
     text-transform: lowercase;
     color: #ead7d7;
     margin: 0 auto;
@@ -21,7 +21,7 @@ h1 {
 }
 
 .body {
-    margin: 0 150px 150px 150px;
+    margin: 0 150px 50px 150px;
     width: 1100px;
     background: #ffffff;
     border-bottom: 1px solid rgb(194, 192, 184);
@@ -50,14 +50,27 @@ form {
     color: #e6e6e6;
     margin: 2px auto;
     width: 950px;
-    padding: 35px 0 30px 30px;
     font-weight: 100;
-    font-size: 45px;
-    font-family: Verdana, sans ;
+    font-family: Verdana, sans;
 }
 
 .input_section:focus {
     color: #4d4d4d;
+}
+
+form .input_section {
+    width: 950px;
+    padding: 35px 0 30px 30px;
+    font-size: 45px;
+}
+
+.list_header .input_section {
+    width: 550px;
+    color: #4d4d4d;
+    padding: 0 0 0 40px;
+    font-style: normal;
+    height: 60px;
+    font-size: 25px;
 }
 
 .main {
@@ -87,7 +100,7 @@ li {
     padding: 35px 0 30px 30px;
     color: #4d4d4d;
     font-size: 45px;
-    font-family: Verdana, sans ;
+    font-family: Verdana, sans;
     word-break: break-all;
 
 }
@@ -101,7 +114,6 @@ li {
 .checkbox {
     display: none;
 }
-
 
 .checkbox-custom {
     margin: 0 0 0 20px;
@@ -146,7 +158,7 @@ li {
     padding: 14px 0 16px 0;
     color: #939393;
     font-size: 25px;
-    font-family: Verdana, sans ;
+    font-family: Verdana, sans;
     font-weight: lighter;
 
 }
@@ -209,7 +221,7 @@ input[type="radio"]:checked + .button {
 .del_item {
     color: #e6e6e6;
     font-size: 45px;
-    font-family: Verdana, sans ;
+    font-family: Verdana, sans;
     padding: 30px 40px 30px 40px;
     float: right;
     font-weight: bolder;
@@ -222,7 +234,7 @@ input[type="radio"]:checked + .button {
 .sub_item {
     color: #e6e6e6;
     font-size: 45px;
-    font-family: Verdana, sans ;
+    font-family: Verdana, sans;
     padding: 30px 40px 30px 40px;
     float: left;
     font-weight: bolder;
@@ -235,10 +247,30 @@ input[type="radio"]:checked + .button {
 .sub_button {
     color: #e6e6e6;
     font-size: 45px;
-    font-family: Verdana, sans ;
+    font-family: Verdana, sans;
     padding: 30px 35px 30px 35px;
     float: left;
     font-weight: bolder;
     border: 0px;
     background: none;
+}
+
+.list_header {
+    box-shadow: 0 -4px 4px #f7f7f7 inset;
+    border-bottom: 1px solid #e6e6e6;
+    width: 1040px;
+    height: 60px;
+    padding: 14px 30px 16px 30px;
+    color: #939393;
+    font-size: 25px;
+    font-family: Verdana, sans;
+    font-weight: lighter;
+}
+.list_header .button_activ {
+    padding: 8px 13px 0px 13px;
+    margin: 5px 5px 5px 5px;
+}
+
+.list_header .button_activ:hover{
+    background-color: #fafafa; ;
 }

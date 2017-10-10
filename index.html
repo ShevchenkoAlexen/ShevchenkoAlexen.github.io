@@ -12,7 +12,20 @@
     <h1>todos</h1>
 
     <div class="body">
-        <form >
+        <div class="list_header">
+            <span>List name:</span>
+            <input type="text" class="input_section" placeholder="Todo list" value = "List Name">
+            <label>
+                <input type="button" value="new_list" class ="new_list_button">
+                <span class="button_activ">New list</span>
+            </label>
+            <label>
+                <input type="button" value="copy_list" class = "new_list_button">
+                <span class="button_activ">Copy list</span>
+            </label>
+
+        </div>
+        <form>
             <input type="submit" name="sub_item" class="sub_button" value="&#9013;">
             <input type="text" class="input_section" placeholder="What need to be done?"/>
 

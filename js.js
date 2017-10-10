@@ -15,6 +15,9 @@ window.onload = function () {
     addListnerCheckTodo.call(document);
     // Добавляем событие сабмит на форму ввода
     addListnerInputForm.call(document);
+    // Добавляем листнер на копирование тодо
+    addListnerNewTodoList.call(document);
+
 
 };
 
@@ -27,6 +30,17 @@ var showProp = {
     active: showActive,
     complited: showComplited
 };
+
+/**
+ * Листнер на создание нового Тодо листа
+ */
+function addListnerNewTodoList() {
+    var clButton = this.querySelectorAll('.new_list_button');
+    for (var i = 0; i < clButton.length; i++) {
+        clButton[i].onclick = createTodoList;
+    }
+}
+
 
 /**
  * Листнер на удаление сделанных заданий
@@ -79,6 +93,44 @@ function addListnerInputForm() {
             event.preventDefault();
         });
     }
+}
+
+/**
+ * Создание нового тодо листа
+ */
+function createTodoList() {
+    var bodytd = this.closest('.body');
+    var count = document.querySelectorAll('.body').length;
+    var cloneType = this.value;
+    var div = bodytd.cloneNode(true); // Клонируем шаблон
+    var divName = div.querySelector('.list_header .input_section');
+    var menu = div.querySelectorAll('.radiokbox');
+    for (var i = 0; i < menu.length; i++) {
+        var menuName = 'menu' + (count + 1);
+        menu[i].setAttribute('name', menuName);
+    }
+    if (cloneType === 'new_list') {
+        divName.value = 'New Todo list';
+        var list = div.querySelectorAll('.del_item_button');
+        for (var i = 1; i < list.length; i++) {
+            clearItem.call(list[i]);
+        }
+    } else {
+        divName.value = divName.value + ' clone';
+    }
+    bodytd.parentNode.appendChild(div); // Вставляем объект
+    addListnerRadio.call(div);
+    // Добавляем событие по клину на очистить выполненные
+    addListnerButtonClear.call(div);
+    // Добавляяем событие на удаление строки (крестики)
+    addListnerDelLine.call(div);
+    // Добавляем событие на выполнение таски. Чтобы поменять стиль
+    addListnerCheckTodo.call(div);
+    // Добавляем событие сабмит на форму ввода
+    addListnerInputForm.call(div);
+    // Добавляем листнер на копирование тодо
+    addListnerNewTodoList.call(div);
+    changeCount.call(document);
 }
 
 /**
@@ -145,6 +197,7 @@ function init() {
 
     var i;
     for (i = 0; i < body.length; i++) {
+
         var radiobox = body[i].querySelectorAll('.radiokbox');
         var j;
         for (j = 0; j < radiobox.length; j++) {
@@ -160,7 +213,8 @@ function init() {
             clickTodo.call(todo[i]);
         }
     }
-    changeCount.call(this);
+    changeCount.call(document);
+
 }
 
 /**
@@ -183,7 +237,7 @@ function newTodo() {
     temp.parentNode.appendChild(div); // Вставляем объект
     addListnerDelLine.call(bodytd);// Вешаем событие на удаление
     addListnerCheckTodo.call(bodytd);
-    changeCount.call(bodytd);
+    changeCount.call(document);
 
     return false;
 }
@@ -192,6 +246,7 @@ function newTodo() {
  * Обновление счетчика тасок
  */
 function changeCount() {
+
     var body = this.querySelectorAll('.body');
     for (var i = 0; i < body.length; i++) {
         var count = body[i].querySelectorAll('.checkbox').length - 1;
@@ -206,7 +261,6 @@ function changeCount() {
  */
 function clearComplite() {
     var bodytd = this.closest('.body');
-    console.info(bodytd);
     var todo = bodytd.querySelectorAll('.checkbox');
     for (var i = todo.length - 1; i >= 0; i--) {
         var li = todo[i].closest('li');
@@ -214,7 +268,7 @@ function clearComplite() {
             li.parentNode.removeChild(li);
         }
     }
-    changeCount.call(bodytd);
+    changeCount.call(document);
 }
 
 /**
@@ -223,5 +277,6 @@ function clearComplite() {
 function clearItem() {
     var li = this.closest('li');
     li.parentNode.removeChild(li);
-    changeCount.call(this.closest('.body'));
+    changeCount.call(document);
 }
+

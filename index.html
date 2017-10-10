@@ -12,66 +12,65 @@
     <h1>todos</h1>
 
     <div class="body">
-        <form id="input_form" onsubmit="newTodo(); return false;">
+        <form >
             <input type="submit" name="sub_item" class="sub_button" value="&#9013;">
-            <input type="text" id="input_section" placeholder="What need to be done?"/>
+            <input type="text" class="input_section" placeholder="What need to be done?"/>
 
         </form>
         <ul>
             <li class="template">
-                <label>
+                <label class="todo_item">
                     <input class="checkbox" type="checkbox" name="checkbox-test">
                     <span class="checkbox-custom"></span>
                     <span class="label"></span>
                 </label>
                 <label>
-                    <input type="button" name="del_item">
+                    <input type="button" class="del_item_button">
                     <span class="del_item">&#x2715;</span>
                 </label>
             </li>
             <li class="unvisible">
-                <label>
+                <label class="todo_item">
                     <input class="checkbox" type="checkbox" name="checkbox-test" checked>
                     <span class="checkbox-custom"></span>
                     <span class="label">First task</span>
                 </label>
                 <label>
-                    <input type="button" name="del_item">
+                    <input type="button" class="del_item_button">
                     <span class="del_item">&#x2715;</span>
                 </label>
             </li>
             <li class="unvisible">
-                <label>
+                <label class="todo_item">
                     <input class="checkbox" type="checkbox" name="checkbox-test">
                     <span class="checkbox-custom"></span>
                     <span class="label">Second task</span>
                 </label>
                 <label>
-                    <input type="button" name="del_item">
+                    <input type="button" class="del_item_button">
                     <span class="del_item">&#x2715;</span>
                 </label>
 
             </li>
         </ul>
-        <div id="menu">
+        <div class="menu">
             <div class="count"> 1 items</div>
             <label>
-                <input type="button" id="#button_clear">
+                <input type="button" class="button_clear_b">
                 <span class="button_clear">Clear complited</span>
             </label>
             <label>
-                <input name="menu" id="complited" type="radio" class="radiokbox">
+                <input name="menu" value="complited" type="radio" class="radiokbox">
                 <span class="button">Complited</span>
             </label>
             <label>
-                <input name="menu" id="active" type="radio" class="radiokbox">
+                <input name="menu" value="active" type="radio" class="radiokbox">
                 <span class="button">Active</span>
             </label>
             <label>
-                <input name="menu" id="all" type="radio" class="radiokbox" checked>
+                <input name="menu" value="all" type="radio" class="radiokbox" checked>
                 <span class="button">All</span>
             </label>
-
         </div>
     </div>
 </section>

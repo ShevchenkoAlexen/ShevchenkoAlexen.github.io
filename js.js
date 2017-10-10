@@ -1,39 +1,22 @@
-"use strict";
+'use strict';
 
 window.onload = function () {
+    // проверяем поддержку
+
     // Запускаем отображение тасок при загрузке. по умолчанию все скрытые чтобы не мигали
-    init();
-
+    init.call(document);
     // Отбираем форматы отображения и вешаем события по смене вида
-    var radiobox = document.querySelectorAll('.radiokbox');
-    for (var i = 0; i < radiobox.length; i++) {
-        radiobox[i].onclick = showProp[radiobox[i].id];
-    }
-
+    addListnerRadio.call(document);
     // Добавляем событие по клину на очистить выполненные
-    var clButton = document.getElementById('#button_clear');
-    clButton.onclick = clearComplite;
-
+    addListnerButtonClear.call(document);
     // Добавляяем событие на удаление строки (крестики)
-    var dItem = document.getElementsByName("del_item");
-    for (var i = 0; i < dItem.length; i++) {
-        dItem[i].onclick = clearItem;
-    }
-
+    addListnerDelLine.call(document);
     // Добавляем событие на выполнение таски. Чтобы поменять стиль
-    var todo = document.getElementsByName('checkbox-test');
-    for (var i = 0; i < todo.length; i++) {
-        todo[i].onclick = clickTodo;
-    }
+    addListnerCheckTodo.call(document);
+    // Добавляем событие сабмит на форму ввода
+    addListnerInputForm.call(document);
 
 };
-
-/**
- * Меняем стиль выполненной таски
- */
-function clickTodo() {
-    this.parentElement.lastElementChild.classList.toggle('label-complite');
-}
 
 /**
  * Функции по форматам отображения
@@ -46,16 +29,79 @@ var showProp = {
 };
 
 /**
+ * Листнер на удаление сделанных заданий
+ */
+function addListnerButtonClear() {
+    var clButton = this.querySelectorAll('.button_clear');
+    for (var i = 0; i < clButton.length; i++) {
+        clButton[i].onclick = clearComplite;
+    }
+}
+
+/**
+ * Листнер на перещелкивание вида
+ */
+function addListnerRadio() {
+    var radiobox = this.querySelectorAll('.radiokbox');
+    for (var i = 0; i < radiobox.length; i++) {
+        radiobox[i].onclick = showProp[radiobox[i].value];
+    }
+}
+
+/**
+ * Листнер на удаление строки
+ */
+function addListnerDelLine() {
+    var dItem = this.querySelectorAll('.del_item_button');
+    for (var i = 0; i < dItem.length; i++) {
+        dItem[i].onclick = clearItem;
+    }
+}
+
+/**
+ * Листнер на изменение вида при выборе таски
+ */
+function addListnerCheckTodo() {
+    var todo = this.querySelectorAll('.checkbox');
+    for (var i = 0; i < todo.length; i++) {
+        todo[i].onclick = clickTodo;
+    }
+}
+
+/**
+ * Листнер на Сабмит формы ввода
+ */
+function addListnerInputForm() {
+    var form = this.querySelectorAll('form');
+    for (var i = 0; i < form.length; i++) {
+        form[i].addEventListener('submit', function (event) {
+            newTodo.call(this);
+            event.preventDefault();
+        });
+    }
+}
+
+/**
+ * Меняем стиль выполненной таски
+ */
+function clickTodo() {
+    this.closest('.todo_item').querySelector('.label').classList.toggle('label-complite');
+}
+
+/**
  * Отображение только выполненных тасок
  */
 function showComplited() {
-    var todo = document.getElementsByName('checkbox-test');
+    var bodytd = this.closest('.body');
+    var todo = bodytd.querySelectorAll('.checkbox');
     for (var i = 0; i < todo.length; i++) {
         if (todo[i].checked) {
-            todo[i].parentElement.parentElement.classList.toggle('unvisible', false); // На выполненных выключаем класс
+            todo[i].closest('li').classList.toggle('unvisible', false);
+            // На выполненных выключаем класс
         }
         if (!todo[i].checked) {
-            todo[i].parentElement.parentElement.classList.toggle('unvisible', true); // НА  не выполненых включаем
+            todo[i].closest('li').classList.toggle('unvisible', true);
+            // НА  не выполненых включаем
         }
     }
 }
@@ -64,13 +110,14 @@ function showComplited() {
  * Отобразить только активные таски
  */
 function showActive() {
-    var todo = document.getElementsByName('checkbox-test');
+    var bodytd = this.closest('.body');
+    var todo = bodytd.querySelectorAll('.checkbox');
     for (var i = 0; i < todo.length; i++) {
         if (todo[i].checked) {
-            todo[i].parentElement.parentElement.classList.toggle('unvisible', true);
+            todo[i].closest('li').classList.toggle('unvisible', true);
         }
         if (!todo[i].checked) {
-            todo[i].parentElement.parentElement.classList.toggle('unvisible', false);
+            todo[i].closest('li').classList.toggle('unvisible', false);
         }
     }
 }
@@ -79,10 +126,10 @@ function showActive() {
  * отобразить все таски
  */
 function showAll() {
-    var todo = document.getElementsByName('checkbox-test');
+    var bodytd = this.closest('.body');
+    var todo = bodytd.querySelectorAll('.checkbox');
     for (var i = 0; i < todo.length; i++) {
-        todo[i].parentElement.parentElement.classList.toggle('unvisible', false);
-
+        todo[i].closest('li').classList.toggle('unvisible', false);
     }
 
 }
@@ -94,19 +141,26 @@ function showAll() {
  * Обновляем счетчик
  */
 function init() {
-    var radiobox = document.querySelectorAll('.radiokbox');
-    for (var i = 0; i < radiobox.length; i++) {
-        if (radiobox[i].checked) {
-            showProp[radiobox[i].id]();
+    var body = this.querySelectorAll('.body');
+
+    var i;
+    for (i = 0; i < body.length; i++) {
+        var radiobox = body[i].querySelectorAll('.radiokbox');
+        var j;
+        for (j = 0; j < radiobox.length; j++) {
+            console.info(radiobox[j]);
+            if (radiobox[j].checked) {
+                showProp[radiobox[j].value].call(radiobox[j]);
+            }
         }
     }
-    var todo = document.getElementsByName('checkbox-test');
-    for (var i = 0; i < todo.length; i++) {
+    var todo = this.querySelectorAll('.checkbox');
+    for (i = 0; i < todo.length; i++) {
         if (todo[i].checked) {
-            todo[i].parentElement.lastElementChild.classList.toggle('label-complite');
+            clickTodo.call(todo[i]);
         }
     }
-    changeCount();
+    changeCount.call(this);
 }
 
 /**
@@ -114,23 +168,23 @@ function init() {
  * @returns {boolean}
  */
 function newTodo() {
-    var nt = document.getElementById('input_section');
+
+    var nt = this.querySelector('.input_section');
     var todo = nt.value;
     if (!todo) {
         return false; // Если ничего не введено, то завершаем
     }
     nt.value = null; // Обнуляем поле ввода
-
-    var temp = document.querySelector('.template');
+    var bodytd = this.closest('.body');
+    var temp = bodytd.querySelector('.template');
     var div = temp.cloneNode(true); // Клонируем шаблон
     div.classList.toggle('template');
-    div.querySelector('.label').textContent = todo;  // Добавляем текст в шаблон
+    div.querySelector('.label').textContent = todo; // Добавляем текст в шаблон
     temp.parentNode.appendChild(div); // Вставляем объект
-    var dItem = document.getElementsByName("del_item");  // Вешаем событие на удаление
-    for (var i = 0; i < dItem.length; i++) {
-        dItem[i].onclick = clearItem;
-    }
-    changeCount(); // Пересчитываем счетчик
+    addListnerDelLine.call(bodytd);// Вешаем событие на удаление
+    addListnerCheckTodo.call(bodytd);
+    changeCount.call(bodytd);
+
     return false;
 }
 
@@ -138,31 +192,36 @@ function newTodo() {
  * Обновление счетчика тасок
  */
 function changeCount() {
-    var count = document.getElementsByName('checkbox-test').length - 1;
-    var elemCount = document.querySelector('.count');
-    elemCount.innerHTML = count + ' item';
+    var body = this.querySelectorAll('.body');
+    for (var i = 0; i < body.length; i++) {
+        var count = body[i].querySelectorAll('.checkbox').length - 1;
 
+        var elemCount = body[i].querySelector('.count');
+        elemCount.innerHTML = count + ' item';
+    }
 }
 
 /**
  * Удаление всех выполненных тасок
  */
 function clearComplite() {
-    var todo = document.getElementsByName('checkbox-test');
+    var bodytd = this.closest('.body');
+    console.info(bodytd);
+    var todo = bodytd.querySelectorAll('.checkbox');
     for (var i = todo.length - 1; i >= 0; i--) {
-        var li = todo[i].parentNode.parentNode;
+        var li = todo[i].closest('li');
         if (todo[i].checked) {
             li.parentNode.removeChild(li);
         }
     }
-    changeCount();
+    changeCount.call(bodytd);
 }
 
 /**
  * Удаление 1 таски
  */
 function clearItem() {
-    var li = this.parentNode.parentNode;
+    var li = this.closest('li');
     li.parentNode.removeChild(li);
-    changeCount();
+    changeCount.call(this.closest('.body'));
 }

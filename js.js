@@ -2,6 +2,11 @@
 
 
 class TodoList {
+
+    /**
+     * Конструктор тудушки. на вход принимает корневой элемент тодолиста
+     * @param {Element}bodyElement
+     */
     constructor(bodyElement) {
         this.list = bodyElement;
         this.changeViewButtonsElem = bodyElement.querySelectorAll('.radiokbox');
@@ -11,6 +16,11 @@ class TodoList {
         this.initTodo();
     }
 
+    /**
+     * Инициализация ТодоЛиста. Переключение в видимое состяние тасок,
+     * добавление обработчиков событий
+     * @returns {TodoList}
+     */
     initTodo() {
 
         for (var j = 0; j < this.changeViewButtonsElem.length; j++) {
@@ -35,11 +45,22 @@ class TodoList {
 
         return this;
     }
+
+    /**
+     * изменение стиля сделанной таски
+     * @param {Number}n
+     * @returns {TodoList}
+     */
     clickTodo(n) {
         this.tasksElem[n].querySelector('.label').classList.toggle('label-complite');
 
         return this;
     }
+
+    /**
+     * Обновление счетчика заданий
+     * @returns {TodoList}
+     */
     changeCount() {
         this.tasksElem = this.list.querySelectorAll('li');
         this.tasksCheckbox = this.list.querySelectorAll('.checkbox');
@@ -49,6 +70,13 @@ class TodoList {
 
         return this;
     }
+
+
+    /**
+     * Запуск функции смены вида
+     * @param {String}view
+     * @returns {TodoList}
+     */
     show(view) {
         if (view === 'complited') {
             this.showComplited();
@@ -57,10 +85,13 @@ class TodoList {
         } else {
             this.showAll();
         }
+
+        return this;
     }
 
     /**
      * Листнер на перещелкивание вида
+     * @returns {TodoList}
      */
     addListnerRadio() {
         for (var i = 0; i < this.changeViewButtonsElem.length; i++) {
@@ -70,8 +101,14 @@ class TodoList {
 
             });
         }
+
+        return this;
     }
 
+    /**
+     * Листнер на выбор таска на все таски
+     * @returns {TodoList}
+     */
     addListnerCheckTodos() {
         for (var i = 0; i < this.tasksCheckbox.length; i++) {
             this.addListnerCheckTodo(this.tasksCheckbox[i]);
@@ -79,6 +116,12 @@ class TodoList {
 
         return this;
     }
+
+    /**
+     * Листнер на выбор таска на все таски
+     * @param {Element}checkbox
+     * @returns {TodoList}
+     */
     addListnerCheckTodo(checkbox) {
         checkbox.addEventListener('click', function () {
             console.info('click');
@@ -89,6 +132,11 @@ class TodoList {
         return this;
 
     }
+
+    /**
+     * Листнер на ввод новой таски
+     * @returns {TodoList}
+     */
     addListnerInputForm() {
         var t = this;
         this.inputForm.addEventListener('submit', function (event) {
@@ -103,6 +151,11 @@ class TodoList {
         return this;
     }
 
+    /**
+     * Добавдение новой таски в тодолист
+     * @param {String}newT
+     * @returns {TodoList}
+     */
     addTask(newT) {
         console.info('addTask');
         if (!newT) {
@@ -120,6 +173,12 @@ class TodoList {
 
         return this;
     }
+
+    /**
+     * Добавление листнера на удаление таски.
+     * @param {Element}div
+     * @returns {TodoList}
+     */
     addListnerDelLine(div) {
         var t = this;
         var dItem = div.querySelectorAll('.del_item_button');
@@ -132,6 +191,10 @@ class TodoList {
         return this;
     }
 
+    /**
+     * Добавление листнера на удаление всех готовых заданий
+     * @returns {TodoList}
+     */
     addListnerButtonClear() {
         var t = this;
         var clButton = this.list.querySelector('.button_clear');
@@ -143,12 +206,23 @@ class TodoList {
         return this;
     }
 
+    /**
+     * Удаление таски
+     * @param {Element}div
+     * @returns {TodoList}
+     */
     delTask(div) {
         var li = div.closest('li');
         li.parentNode.removeChild(li);
         this.changeCount();
+
+        return this;
     }
 
+    /**
+     * Удаление всех готовых тасок
+     * @returns {TodoList}
+     */
     clearComplite() {
         console.info(this.tasksElem.length);
         for (var i = this.tasksElem.length - 1; i >= 0; i--) {
@@ -165,6 +239,7 @@ class TodoList {
 
     /**
      * Отображение только выполненных тасок
+     * @returns {TodoList}
      */
     showComplited() {
         for (var i = 0; i < this.tasksElem.length; i++) {
@@ -184,6 +259,7 @@ class TodoList {
 
     /**
      * Отобразить только активные таски
+     * @returns {TodoList}
      */
     showActive() {
 
@@ -202,6 +278,7 @@ class TodoList {
 
     /**
      * отобразить все таски
+     * @returns {TodoList}
      */
     showAll() {
         for (var i = 0; i < this.tasksElem.length; i++) {
@@ -211,6 +288,10 @@ class TodoList {
         return this;
     }
 
+    /**
+     * Листнер на создание нового тодолиста
+     * @returns {TodoList}
+     */
     addListnerNewTodoList() {
         var t = this;
         var clButton = this.list.querySelectorAll('.new_list_button');
@@ -221,7 +302,15 @@ class TodoList {
 
             });
         }
+
+        return this;
     }
+
+    /**
+     * Создание нового тодолиста
+     * @param {String}type new_list||copy_List
+     * @returns {TodoList}
+     */
     createNewTodo(type) {
 
         var count = document.querySelectorAll('.body').length;
@@ -243,12 +332,17 @@ class TodoList {
             divName.value = divName.value + ' clone';
         }
         this.list.parentNode.appendChild(newTodo.list);
+
+        return this;
     }
 
 
 }
 
 
+/**
+ * ЗАпуск
+ */
 window.onload = function () {
     // проверяем поддержку
     var startTodo = [];

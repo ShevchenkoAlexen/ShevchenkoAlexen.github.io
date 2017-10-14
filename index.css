@@ -65,9 +65,9 @@ form .input_section {
 }
 
 .list_header .input_section {
-    width: 550px;
+    width: 450px;
     color: #4d4d4d;
-    padding: 0 0 0 40px;
+    padding: 0 0 0 20px;
     font-style: normal;
     height: 60px;
     font-size: 25px;
@@ -231,6 +231,19 @@ input[type="radio"]:checked + .button {
     color: #4d4d4d;
 }
 
+.del_todo {
+    color: #e6e6e6;
+    font-size: 45px;
+    font-family: Verdana, sans;
+    padding: 0px 0px 0px 20px;
+    float: right;
+    font-weight: bolder;
+}
+
+.del_todo:hover {
+    color: #4d4d4d;
+}
+
 .sub_item {
     color: #e6e6e6;
     font-size: 45px;
@@ -258,9 +271,9 @@ input[type="radio"]:checked + .button {
 .list_header {
     box-shadow: 0 -4px 4px #f7f7f7 inset;
     border-bottom: 1px solid #e6e6e6;
-    width: 1040px;
+    width: 1030px;
     height: 60px;
-    padding: 14px 30px 16px 30px;
+    padding: 14px 40px 16px 30px;
     color: #939393;
     font-size: 25px;
     font-family: Verdana, sans;

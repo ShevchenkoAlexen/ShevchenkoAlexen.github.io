@@ -108,7 +108,7 @@ class Task {
 
 }
 
-class TodoList {
+module.exports = class TodoList {
 
     /**
      * Конструктор тудушки. на вход принимает корневой элемент тодолиста

@@ -1,5 +1,7 @@
 'use strict';
 
+var TodoList = require('./todolist.js');
+
 /**
  * ЗАпуск
  */

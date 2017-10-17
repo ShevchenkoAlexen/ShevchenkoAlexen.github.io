@@ -16,11 +16,11 @@ class Task {
         this.addListnerDelLine();
     }
 
-    get getTask() {
+    get taskNode() {
         return this.task;
     }
 
-    set setTask(task) {
+    set taskNode(task) {
         this.task = task;
         this.check = task.querySelector('.checkbox').checked;
         this.checkBox = task.querySelector('.checkbox');
@@ -29,15 +29,15 @@ class Task {
     }
 
 
-    get getCheckBox() {
+    get checkBoxNode() {
         return this.checkBox;
     }
 
-    get getCheckBoxStatus() {
+    get checkBoxStatus() {
         return this.check;
     }
 
-    set setCheckBoxStatus(status) {
+    set checkBoxStatus(status) {
         if (status === this.check) {
             return this.check;
         }
@@ -52,11 +52,11 @@ class Task {
         }
     }
 
-    get getViewStatus() {
+    get viewStatus() {
         return this.task.style.display;
     }
 
-    set setViewStatus(stat) {
+    set viewStatus(stat) {
         if (!stat) {
             this.task.style.display = 'none';
         } else {
@@ -79,7 +79,7 @@ class Task {
             var l = this.closest('.todo_item').querySelector('.label');
             l.classList.toggle('label-complite');
             var v = this.checked;
-            t.setCheckBoxStatus = v;
+            t.checkBoxStatus = v;
         });
 
         return this;
@@ -307,11 +307,11 @@ module.exports = class TodoList {
         for (var i = 0; i < this.tasks.length; i++) {
             var checked = this.tasks[i].check;
             if (checked) {
-                this.tasks[i].setViewStatus = true;
+                this.tasks[i].viewStatus = true;
                 // На выполненных выключаем класс
             }
             if (!checked) {
-                this.tasks[i].setViewStatus = false;
+                this.tasks[i].viewStatus = false;
                 // НА  не выполненых включаем
             }
         }
@@ -328,10 +328,10 @@ module.exports = class TodoList {
         for (var i = 0; i < this.tasks.length; i++) {
             var checked = this.tasks[i].check;
             if (checked) {
-                this.tasks[i].setViewStatus = false;
+                this.tasks[i].viewStatus = false;
             }
             if (!checked) {
-                this.tasks[i].setViewStatus = true;
+                this.tasks[i].viewStatus = true;
             }
         }
 
@@ -344,7 +344,7 @@ module.exports = class TodoList {
      */
     showAll() {
         for (var i = 0; i < this.tasks.length; i++) {
-            this.tasks[i].setViewStatus = true;
+            this.tasks[i].viewStatus = true;
         }
 
         return this;
@@ -373,7 +373,6 @@ module.exports = class TodoList {
      * @returns {TodoList}
      */
     createNewTodo(type) {
-
         var count = document.getElementsByName('TodoList').length;
         var div = this.list.cloneNode(true);
         var menu = div.querySelectorAll('.radiokbox');
@@ -394,7 +393,7 @@ module.exports = class TodoList {
         } else {
             for (i = 1; i < list.length; i++) {
                 var t = new Task(newTodo);
-                t.setTask = list[i];
+                t.taskNode = list[i];
                 newTodo.tasks.push(t);
             }
             divName.value = divName.value + ' clone';
@@ -403,6 +402,5 @@ module.exports = class TodoList {
 
         return this;
     }
-
 
 }

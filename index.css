@@ -88,11 +88,15 @@ ul {
 }
 
 li {
+
+
+}
+
+.task{
     box-shadow: 0 -4px 4px #f7f7f7 inset;
     border-bottom: 1px solid #e6e6e6;
     width: 1100px;
     min-height: 130px;;
-
 }
 
 .label {

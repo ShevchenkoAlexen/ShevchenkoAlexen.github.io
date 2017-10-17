@@ -7,7 +7,9 @@ class Task {
         this.task = todo.template.cloneNode(true);
         this.task.classList.toggle('template', false);
         this.checkBox = this.task.querySelector('.checkbox');
-        this.checkBox.checked = checked;
+        if (this.checkBox) {
+            this.checkBox.checked = checked;
+        }
         this.task.querySelector('.label').innerHTML = taskName;
 
         this.addListnerCheckTodo();
@@ -70,6 +72,9 @@ class Task {
      */
     addListnerCheckTodo() {
         var t = this;
+        if (!this.checkBox) {
+            return this;
+        }
         this.checkBox.addEventListener('click', function () {
             var l = this.closest('.todo_item').querySelector('.label');
             l.classList.toggle('label-complite');
@@ -160,6 +165,9 @@ module.exports = class TodoList {
         }
         count = this.tasks.length;
         var elemCount = this.list.querySelector('.count');
+        if (!elemCount) {
+            return this;
+        }
         elemCount.innerHTML = count + ' item';
 
         return this;
@@ -242,6 +250,9 @@ module.exports = class TodoList {
     addListnerDelTodo() {
         var t = this;
         var dItem = this.list.querySelector('.del_todo_list');
+        if (!dItem) {
+            return this;
+        }
         dItem.addEventListener('click', function () {
             var i = document.getElementsByName('TodoList').length;
             if (i <= 1) {
@@ -261,6 +272,9 @@ module.exports = class TodoList {
     addListnerButtonClear() {
         var t = this;
         var clButton = this.list.querySelector('.button_clear');
+        if (!clButton) {
+            return this;
+        }
         clButton.addEventListener('click', function () {
             t.clearComplite();
         });
@@ -369,7 +383,7 @@ module.exports = class TodoList {
         }
         var newTodo = new TodoList(div);
         var divName = newTodo.list.querySelector('.list_header .input_section');
-        var list = newTodo.list.querySelectorAll('li');
+        var list = newTodo.list.querySelectorAll('.task');
         var i = 1;
         if (type === 'new_list') {
             divName.value = 'New Todo list';

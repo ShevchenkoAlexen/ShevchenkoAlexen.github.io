@@ -12,7 +12,7 @@ window.onload = function () {
     var lists = document.getElementsByName('TodoList');
     for (var i = 0; i < lists.length; i++) {
         startTodo[i] = new TodoList(lists[i]);
-        startTodo[i].addTask('привет мир ' + i);
+        startTodo[i].addTask('Привет мир ' + i);
 
     }
 

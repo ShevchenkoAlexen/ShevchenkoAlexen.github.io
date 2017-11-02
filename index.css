@@ -1,10 +1,10 @@
 /* Добавляем шрифт для заголовка*/
 @font-face {
     font-family: 'COCOMAT-UltraLight';
-    src: url('src/fonts/COCOMAT-UltraLight.ttf.woff') format('woff'),
-    url('src/fonts/COCOMAT-UltraLight.ttf.svg#COCOMAT-UltraLight') format('svg'),
-    url('src/fonts/COCOMAT-UltraLight.ttf.eot'),
-    url('src/fonts/COCOMAT-UltraLight.ttf.eot?#iefix') format('embedded-opentype');
+    src: url('fonts/COCOMAT-UltraLight.ttf.woff') format('woff'),
+    url('fonts/COCOMAT-UltraLight.ttf.svg#COCOMAT-UltraLight') format('svg'),
+    url('fonts/COCOMAT-UltraLight.ttf.eot'),
+    url('fonts/COCOMAT-UltraLight.ttf.eot?#iefix') format('embedded-opentype');
     font-weight: normal;
     font-style: normal;
 }

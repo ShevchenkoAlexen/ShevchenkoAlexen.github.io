@@ -1,119 +1,8 @@
 'use strict';
 
-class Task {
-    constructor(todo, taskName, checked) {
-        this.todo = todo;
-        this.check = checked;
-        this.task = todo.template.cloneNode(true);
-        this.task.classList.toggle('template', false);
-        this.checkBox = this.task.querySelector('.checkbox');
-        if (this.checkBox) {
-            this.checkBox.checked = checked;
-        }
-        this.task.querySelector('.label').innerHTML = taskName;
+import Task from './tasks';
 
-        this.addListnerCheckTodo();
-        this.addListnerDelLine();
-    }
-
-    get taskNode() {
-        return this.task;
-    }
-
-    set taskNode(task) {
-        this.task = task;
-        this.check = task.querySelector('.checkbox').checked;
-        this.checkBox = task.querySelector('.checkbox');
-        this.addListnerCheckTodo();
-        this.addListnerDelLine();
-    }
-
-
-    get checkBoxNode() {
-        return this.checkBox;
-    }
-
-    get checkBoxStatus() {
-        return this.check;
-    }
-
-    set checkBoxStatus(status) {
-        if (status === this.check) {
-            return this.check;
-        }
-        if (status) {
-            this.checkBox.checked = true;
-            this.check = true;
-            this.task.querySelector('.label').classList.toggle('label-complite', true);
-        } else {
-            this.checkBox.checked = false;
-            this.check = false;
-            this.task.querySelector('.label').classList.toggle('label-complite', false);
-        }
-    }
-
-    get viewStatus() {
-        return this.task.style.display;
-    }
-
-    set viewStatus(stat) {
-        if (!stat) {
-            this.task.style.display = 'none';
-        } else {
-            this.task.style.display = '';
-        }
-    }
-
-
-    /**
-     * Листнер на выбор таска на все таски
-     * @param {Element}checkbox
-     * @returns {TodoList}
-     */
-    addListnerCheckTodo() {
-        var t = this;
-        if (!this.checkBox) {
-            return this;
-        }
-        this.checkBox.addEventListener('click', function () {
-            var l = this.closest('.todo_item').querySelector('.label');
-            l.classList.toggle('label-complite');
-            var v = this.checked;
-            t.checkBoxStatus = v;
-        });
-
-        return this;
-
-    }
-
-    /**
-     * Добавление листнера на удаление таски.
-     * @param {Element}div
-     * @returns {TodoList}
-     */
-    addListnerDelLine() {
-        var t = this;
-        var dItem = this.task.querySelectorAll('.del_item_button');
-        for (var i = 0; i < dItem.length; i++) {
-            dItem[i].addEventListener('click', function () {
-                t.deleteTask();
-                t.todo.changeCount();
-            });
-        }
-
-        return this;
-    }
-
-    deleteTask() {
-        if (this.task.parentNode) {
-            this.task.parentNode.removeChild(this.task);
-        }
-    }
-
-
-}
-
-module.exports = class TodoList {
+class TodoList {
 
     /**
      * Конструктор тудушки. на вход принимает корневой элемент тодолиста
@@ -121,8 +10,8 @@ module.exports = class TodoList {
      */
     constructor(bodyElement) {
         this.list = bodyElement;
-        this.changeViewButtonsElem = bodyElement.querySelectorAll('.radiokbox');
-        this.inputForm = bodyElement.querySelector('.input_form');
+        this.changeViewButtonsElem = bodyElement.querySelectorAll('.change-view-buttons__radiobox');
+        this.inputForm = bodyElement.querySelector('.input-form');
         this.template = bodyElement.querySelector('.template');
         this.tasks = [];
 
@@ -213,7 +102,7 @@ module.exports = class TodoList {
      */
     addListnerInputForm() {
         var t = this;
-        var nt = this.inputForm.querySelector('.input_section');
+        var nt = this.inputForm.querySelector('.input-form__input-section');
         this.inputForm.addEventListener('submit', function (event) {
             event.preventDefault();
             var todo = nt.value;
@@ -249,12 +138,12 @@ module.exports = class TodoList {
      */
     addListnerDelTodo() {
         var t = this;
-        var dItem = this.list.querySelector('.del_todo_list');
+        var dItem = this.list.querySelector('.del-todo-list');
         if (!dItem) {
             return this;
         }
         dItem.addEventListener('click', function () {
-            var i = document.getElementsByName('TodoList').length;
+            var i = document.querySelectorAll('.body-todo-list').length;
             if (i <= 1) {
                 t.createNewTodo('new_list');
             }
@@ -271,7 +160,7 @@ module.exports = class TodoList {
      */
     addListnerButtonClear() {
         var t = this;
-        var clButton = this.list.querySelector('.button_clear');
+        var clButton = this.list.querySelector('.button-clear-complite');
         if (!clButton) {
             return this;
         }
@@ -289,7 +178,7 @@ module.exports = class TodoList {
      */
     clearComplite() {
         for (var i = this.tasks.length - 1; i >= 0; i--) {
-            if (this.tasks[i].check) {
+            if (this.tasks[i].isCheck) {
                 this.tasks[i].deleteTask();
             }
         }
@@ -305,7 +194,7 @@ module.exports = class TodoList {
      */
     showComplited() {
         for (var i = 0; i < this.tasks.length; i++) {
-            var checked = this.tasks[i].check;
+            var checked = this.tasks[i].isCheck;
             if (checked) {
                 this.tasks[i].viewStatus = true;
                 // На выполненных выключаем класс
@@ -326,7 +215,7 @@ module.exports = class TodoList {
     showActive() {
 
         for (var i = 0; i < this.tasks.length; i++) {
-            var checked = this.tasks[i].check;
+            var checked = this.tasks[i].isCheck;
             if (checked) {
                 this.tasks[i].viewStatus = false;
             }
@@ -356,7 +245,7 @@ module.exports = class TodoList {
      */
     addListnerNewTodoList() {
         var t = this;
-        var clButton = this.list.querySelectorAll('.new_list_button');
+        var clButton = this.list.querySelectorAll('.new-list-button');
         for (var i = 0; i < clButton.length; i++) {
             clButton[i].addEventListener('click', function () {
                 t.createNewTodo(this.value);
@@ -373,18 +262,18 @@ module.exports = class TodoList {
      * @returns {TodoList}
      */
     createNewTodo(type) {
-        var count = document.getElementsByName('TodoList').length;
+        var count = document.querySelectorAll('.body-todo-list').length;
         var div = this.list.cloneNode(true);
-        var menu = div.querySelectorAll('.radiokbox');
+        var menu = div.querySelectorAll('.change-view-buttons__radiobox');
         for (var j = 0; j < menu.length; j++) {
             var menuName = 'menu' + (count + 1);
             menu[j].setAttribute('name', menuName);
         }
         var newTodo = new TodoList(div);
-        var divName = newTodo.list.querySelector('.list_header .input_section');
+        var divName = newTodo.list.querySelector('.list-name__input-name');
         var list = newTodo.list.querySelectorAll('.task');
         var i = 1;
-        if (type === 'new_list') {
+        if (type === 'New list') {
             divName.value = 'New Todo list';
 
             for (i = 1; i < list.length; i++) {
@@ -404,3 +293,5 @@ module.exports = class TodoList {
     }
 
 }
+
+export default  TodoList;

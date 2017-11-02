@@ -1,15 +1,27 @@
 /* Добавляем шрифт для заголовка*/
 @font-face {
     font-family: 'COCOMAT-UltraLight';
-    src: url('COCOMAT-UltraLight.ttf.woff') format('woff'),
-    url('COCOMAT-UltraLight.ttf.svg#COCOMAT-UltraLight') format('svg'),
-    url('COCOMAT-UltraLight.ttf.eot'),
-    url('COCOMAT-UltraLight.ttf.eot?#iefix') format('embedded-opentype');
+    src: url('src/fonts/COCOMAT-UltraLight.ttf.woff') format('woff'),
+    url('src/fonts/COCOMAT-UltraLight.ttf.svg#COCOMAT-UltraLight') format('svg'),
+    url('src/fonts/COCOMAT-UltraLight.ttf.eot'),
+    url('src/fonts/COCOMAT-UltraLight.ttf.eot?#iefix') format('embedded-opentype');
     font-weight: normal;
     font-style: normal;
 }
 
-h1 {
+.main {
+    max-width: 1400px;
+    min-width: 1100px;
+    background: #f5f5f5;
+    margin: 0 auto;
+    border: solid black 1px;
+}
+
+.header {
+    margin: 0 auto;
+}
+
+.header__name {
     text-align: center;
     font-size: 185px;
     font-weight: lighter;
@@ -17,15 +29,14 @@ h1 {
     text-transform: lowercase;
     color: #ead7d7;
     margin: 0 auto;
-
 }
 
-.body {
-    margin: 0 150px 50px 150px;
-    width: 1100px;
+.body-todo-list {
+    max-width: 1100px;
+    min-width: 900px;
+    margin: auto;
     background: #ffffff;
     border-bottom: 1px solid rgb(194, 192, 184);
-
     box-shadow: 0 5px 3px -4px rgba(0, 0, 0, .2),
     0 10px 0 -4px rgb(255, 255, 255),
     0 10px 0 -3px rgb(194, 192, 184),
@@ -34,260 +45,281 @@ h1 {
     0 21px 0 -7px rgb(194, 192, 184),
     0 32px 0 -12px rgb(255, 255, 255),
     0 32px 0 -11px rgb(194, 192, 184),
-    0 0 9px rgb(194, 192, 184);;
+    0 0 9px rgb(194, 192, 184);
+    margin-bottom: 55px;
+    display: flex;
+    flex-direction: column;
+
+
 }
 
-form {
+.todo-list-header {
     box-shadow: 0 -4px 4px #f7f7f7 inset;
     border-bottom: 1px solid #e6e6e6;
-    width: 1100px;
-    height: 130px;
+    color: #939393;
+    font-size: 25px;
+    font-family: Verdana, sans;
+    font-weight: lighter;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    min-height: 90px;
+    align-items: center;
+
 }
 
-.input_section {
-    font-style: italic;
-    border: 0;
+.list-name {
+    display: flex;
+    margin: 0 15px 0 15px;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.list-name__desc {
+    min-width: 150px;
+}
+
+.list-name__input-name {
+    min-width: 450px;
+    color: #4d4d4d;
+    font-style: normal;
+    font-size: 25px;
+    width: 100%;
+    border: 0px;
+    font-weight: 100;
+}
+
+.list-header-buttons {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    margin: 0 10px 0 5px;
+
+}
+
+.new-list-button {
+    border: 2px solid;
+    border-color: #efd4d4;
+    border-radius: 6px;
+    margin: 0 5px 0 5px;
+    background-color: white;
+    color: #939393;
+    font-size: 25px;
+    font-family: Verdana, sans;
+    min-height: 54px;
+}
+
+.new-list-button:hover {
+    background-color: #fafafa;
+}
+
+.del-todo-list {
     color: #e6e6e6;
-    margin: 2px auto;
-    width: 950px;
+    font-size: 45px;
+    font-family: Verdana, sans;
+    height: 60px;
+    width: 60px;
+    margin: 0 10px 0 10px;
+    border: 0px;
+    background-color: white;
+    vertical-align: center;
+
+}
+
+.del-todo-list:hover {
+    color: #4d4d4d;
+}
+
+
+.input-form{
+    box-shadow: 0 -4px 4px #f7f7f7 inset;
+    border-bottom: 1px solid #e6e6e6;
+    width: 100%;
+    min-height: 130px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+
+}
+
+.input-form__input-section{
+
+    width: 100%;
     font-weight: 100;
     font-family: Verdana, sans;
-}
-
-.input_section:focus {
-    color: #4d4d4d;
-}
-
-form .input_section {
-    width: 950px;
-    padding: 35px 0 30px 30px;
     font-size: 45px;
+    color: #e6e6e6;
+    border: 0px;
+    font-style: italic;
 }
 
-.list_header .input_section {
-    width: 450px;
+.input-form__submit-button{
+    min-height: 100px;
+    min-width: 100px;
+    font-family: Verdana, sans;
+    font-size: 45px;
+    border: 0px;
+    font-weight: bolder;
+    background-color: white;
+    color: #e6e6e6;;
+}
+.input-form__submit-button:hover {
     color: #4d4d4d;
-    padding: 0 0 0 20px;
-    font-style: normal;
-    height: 60px;
-    font-size: 25px;
+}
+.input-form__input-section:focus {
+    color: #4d4d4d;
 }
 
-.main {
 
-    width: 1400px;
-    background: #f5f5f5;
-    margin: 0 auto;
-    border: solid black 1px;
-}
-
-ul {
-    margin: 0 auto;
-    list-style-type: none;
-    padding: 0;
-}
-
-li {
-
-
-}
 
 .task{
     box-shadow: 0 -4px 4px #f7f7f7 inset;
     border-bottom: 1px solid #e6e6e6;
-    width: 1100px;
-    min-height: 130px;;
+    width: 100%;
+    min-height: 130px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
 }
 
-.label {
-    width: 850px;
-    padding: 37px 0 37px 30px;
+.task_invisible {
+    display: none;
+}
+
+.task-todo-item{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+}
+
+.task-todo-item__label {
     color: #4d4d4d;
     font-size: 45px;
     font-family: Verdana, sans;
+    width: 100%;
+    display: inline-block;
+    vertical-align: middle;
     word-break: break-all;
 
 }
 
-.label-complite {
+.task-todo-item__label-complite {
     color: #e6e6e6;
     font-style: italic;
     text-decoration: line-through;
 }
 
-.checkbox {
+
+.task-todo-item__checkbox {
     display: none;
 }
 
-.checkbox-custom {
-    margin: 0 0 0 20px;
+.task-todo-item__checkbox-custom {
+    margin: 0 20px 0 20px;
     position: relative; /* Обязательно задаем, чтобы мы могли абсолютным образом позиционировать псевдоэлемент внютри нашего кастомного чекбокса */
-    width: 62px; /* Обязательно задаем ширину */
-    height: 62px; /* Обязательно задаем высоту */
+    min-width: 62px; /* Обязательно задаем ширину */
+    min-height: 62px; /* Обязательно задаем высоту */
     border: 2px solid #ccc;
     border-radius: 31px;
-}
-
-.checkbox-custom,
-.label {
-
     display: inline-block;
     vertical-align: middle;
 
 }
 
-/* Если реальный чекбокс у нас отмечен, то тогда добавляем данный признак и к нашему кастомному чекбоксу  */
-.checkbox:checked + .checkbox-custom::before {
-    content: ""; /* Добавляем наш псевдоэлемент */
-    display: block; /* Делаем его блочным элементом */
-    position: absolute; /* Позиционируем его абсолютным образом */
 
+/* Если реальный чекбокс у нас отмечен, то тогда добавляем данный признак и к нашему кастомному чекбоксу  */
+.task-todo-item__checkbox:checked + .task-todo-item__checkbox-custom::before {
+    content: ""; /* Добавляем наш псевдоэлемент */
+    position: absolute; /* Позиционируем его абсолютным образом */
     /* Задаем расстояние от верхней, правой, нижней и левой границы */
     top: 2px;
     right: 2px;
     bottom: 2px;
     left: 2px;
-
     background: url("im/check4.png") no-repeat; /* Добавляем фон. */
     border-radius: 2px;
 }
 
-.checkbox:checked + .checkbox-custom {
+.task-todo-item__checkbox:checked + .task-todo-item__checkbox-custom {
     border-color: #c4ddd9;
 }
 
-.menu {
+.task-ul{
     width: 100%;
-    height: 50px;
-    padding: 14px 0 16px 0;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.task__del-item-button {
+    color: #e6e6e6;
+    font-size: 45px;
+    font-family: Verdana, sans;
+    min-height: 60px;
+    min-width: 60px;
+    margin: 0 25px 0 20px;
+    border: 0px;
+    background-color: white;
+    vertical-align: center;
+
+}
+
+.task__del-item-button:hover {
+    color: #4d4d4d;
+}
+
+.footer-todo-menu{
+    width: 100%;
+    min-height: 80px;
     color: #939393;
     font-size: 25px;
     font-family: Verdana, sans;
     font-weight: lighter;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
 
 }
 
-.count {
-    height: 42px;
-    padding: 8px 13px 0 13px;
-    vertical-align: middle;
-    margin: 0 0 0 30px;
-    float: left;
-
+.count{
+    margin: 0 15px 0 35px;
 }
 
-.button_activ {
-    height: 42px;
-    padding: 8px 13px 0 13px;
-    border: 2px solid;
-    border-color: #efd4d4;
-    border-radius: 6px;
-    float: right;
-    vertical-align: middle;
-    margin: 0 14px 0 14px;
-}
-
-.button {
-    height: 42px;
-    padding: 8px 13px 0 13px;
+.change-view-buttons__text{
+    padding: 5px;
     border: 2px solid;
     border-color: #ffffff;
     border-radius: 6px;
-    float: right;
-    vertical-align: middle;
     margin: 0 14px 0 14px;
+    min-height: 54px;
+
 }
 
-.button_clear {
-    height: 42px;
-    padding: 8px 13px 0 13px;
-    vertical-align: middle;
-    margin: 0 14px 0 110px;
-    float: right;
-}
-
-input[type="radio"] {
+.change-view-buttons__radiobox{
     display: none;
 }
 
-input[type="button"] {
-    display: none;
-}
-
-input[type="radio"]:checked + .button {
+.change-view-buttons__radiobox:checked + .change-view-buttons__text {
     border-color: #efd4d4;
 }
 
-.unvisible, .template {
+.template {
     display: none;
 }
 
-.del_item {
-    color: #e6e6e6;
-    font-size: 45px;
-    font-family: Verdana, sans;
-    padding: 30px 40px 30px 40px;
-    float: right;
-    font-weight: bolder;
-}
-
-.del_item:hover {
-    color: #4d4d4d;
-}
-
-.del_todo {
-    color: #e6e6e6;
-    font-size: 45px;
-    font-family: Verdana, sans;
-    padding: 0px 0px 0px 20px;
-    float: right;
-    font-weight: bolder;
-}
-
-.del_todo:hover {
-    color: #4d4d4d;
-}
-
-.sub_item {
-    color: #e6e6e6;
-    font-size: 45px;
-    font-family: Verdana, sans;
-    padding: 30px 40px 30px 40px;
-    float: left;
-    font-weight: bolder;
-}
-
-.sub_item:hover, .sub_button:hover {
-    color: #4d4d4d;
-}
-
-.sub_button {
-    color: #e6e6e6;
-    font-size: 45px;
-    font-family: Verdana, sans;
-    padding: 30px 35px 30px 35px;
-    float: left;
-    font-weight: bolder;
-    border: 0px;
-    background: none;
-}
-
-.list_header {
-    box-shadow: 0 -4px 4px #f7f7f7 inset;
-    border-bottom: 1px solid #e6e6e6;
-    width: 1030px;
-    height: 60px;
-    padding: 14px 40px 16px 30px;
+.button-clear-complite {
+    background-color: white;
     color: #939393;
     font-size: 25px;
     font-family: Verdana, sans;
-    font-weight: lighter;
-}
-.list_header .button_activ {
-    padding: 8px 13px 0px 13px;
-    margin: 5px 5px 5px 5px;
+    margin: 0 35px 0 15px;
+    border: 0px;
+
 }
 
-.list_header .button_activ:hover{
-    background-color: #fafafa; ;
+.footer{
+    min-height: 100px;
 }

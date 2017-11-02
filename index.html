@@ -7,67 +7,60 @@
 
 </head>
 <body>
-<script src="newjs.js"></script>
+<script src="build.js"></script>
+
 <section class="main">
-    <h1>todos</h1>
-
-    <div name = "TodoList" class="body">
-        <div class="list_header">
-            <span>List name:</span>
-            <input type="text" class="input_section" placeholder="Todo list" value = "List Name">
-            <label>
-                <input type="button" class="del_todo_list">
-                <span class="del_todo">&#x2715;</span>
-            </label>
-
-            <label>
-                <input type="button" value="new_list" class ="new_list_button">
-                <span class="button_activ">New list</span>
-            </label>
-            <label>
-                <input type="button" value="copy_list" class = "new_list_button">
-                <span class="button_activ">Copy list</span>
-            </label>
+    <div class="header">
+        <h1 class="header__name">todos</h1>
+    </div>
+    <div class="body-todo-list">
+        <div class="todo-list-header">
+            <div class="list-name">
+                <span class="list-name__desc">List name:</span>
+                <input type="text" class="list-name__input-name" placeholder="Todo list">
+            </div>
+            <div class="list-header-buttons">
+                <input type="button" value="New list" class="new-list-button">
+                <input type="button" value="Copy list" class="new-list-button">
+                <input type="button" class="del-todo-list" value="&#x2715;">
+            </div>
 
         </div>
-        <form class = "input_form">
-            <input type="submit" name="sub_item" class="sub_button" value="&#9013;">
-            <input type="text" class="input_section" placeholder="What need to be done?"/>
+        <form class="input-form">
+            <input type="submit" name="sub_item" class="input-form__submit-button" value="&#9013;">
+            <input type="text" class="input-form__input-section" placeholder="What need to be done?"/>
 
         </form>
-        <ul>
+        <ul class="task-ul">
             <li class="task template">
-                <label class="todo_item">
-                    <input class="checkbox" type="checkbox" name="checkbox-test">
-                    <span class="checkbox-custom"></span>
-                    <span class="label"></span>
+                <label class="task-todo-item">
+                    <input class="task-todo-item__checkbox" type="checkbox" name="checkbox-test" >
+                    <span class="task-todo-item__checkbox-custom"></span>
+                    <span class="task-todo-item__label">Задание</span>
                 </label>
-                <label>
-                    <input type="button" class="del_item_button">
-                    <span class="del_item">&#x2715;</span>
-                </label>
+                <input type="button" class="task__del-item-button" value="&#x2715;">
             </li>
         </ul>
-        <div class="menu">
+        <div class="footer-todo-menu">
             <div class="count"> 1 items</div>
-            <label>
-                <input type="button" class="button_clear_b">
-                <span class="button_clear">Clear complited</span>
-            </label>
-            <label>
-                <input name="menu" value="complited" type="radio" class="radiokbox">
-                <span class="button">Complited</span>
-            </label>
-            <label>
-                <input name="menu" value="active" type="radio" class="radiokbox">
-                <span class="button">Active</span>
-            </label>
-            <label>
-                <input name="menu" value="all" type="radio" class="radiokbox" checked>
-                <span class="button">All</span>
-            </label>
+            <div class="change-view-menu">
+                <label class ="change-view-buttons">
+                    <input name="menu" value="all" type="radio" class="change-view-buttons__radiobox" checked>
+                    <span class="change-view-buttons__text">All</span>
+                </label>
+                <label class ="change-view-buttons">
+                    <input name="menu" value="active" type="radio" class="change-view-buttons__radiobox">
+                    <span class="change-view-buttons__text">Active</span>
+                </label>
+                <label class ="change-view-buttons">
+                    <input name="menu" value="complited" type="radio" class="change-view-buttons__radiobox">
+                    <span class="change-view-buttons__text">Complited</span>
+                </label>
+            </div>
+            <input type="button" class="button-clear-complite" value="Clear complited">
         </div>
     </div>
+
 </section>
 </body>
 </html>

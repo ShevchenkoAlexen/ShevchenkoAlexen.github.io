@@ -14,7 +14,6 @@ class TodoList {
         this.inputForm = bodyElement.querySelector('.input-form');
         this.template = bodyElement.querySelector('.template');
         this.tasks = [];
-
         this.initTodo();
     }
 
@@ -46,6 +45,7 @@ class TodoList {
      * @returns {TodoList}
      */
     changeCount() {
+        console.info(this);
         var count = this.tasks.length;
         for (var i = count - 1; i >= 0; i--) {
             if (!this.tasks[i].task.parentNode) {
@@ -86,10 +86,8 @@ class TodoList {
      */
     addListnerRadio() {
         for (var i = 0; i < this.changeViewButtonsElem.length; i++) {
-            var t = this;
-            this.changeViewButtonsElem[i].addEventListener('click', function () {
-                t.show(this.value);
-
+            this.changeViewButtonsElem[i].addEventListener('click', (but) => {
+                this.show( but.target.value);
             });
         }
 
@@ -101,12 +99,11 @@ class TodoList {
      * @returns {TodoList}
      */
     addListnerInputForm() {
-        var t = this;
         var nt = this.inputForm.querySelector('.input-form__input-section');
-        this.inputForm.addEventListener('submit', function (event) {
+        this.inputForm.addEventListener('submit', (event) => {
             event.preventDefault();
-            var todo = nt.value;
-            t.addTask(todo);
+            var taskName = nt.value;
+            this.addTask(taskName);
             nt.value = null;
 
         });
@@ -123,7 +120,9 @@ class TodoList {
         if (!newT) {
             return this; // Если ничего не введено, то завершаем
         }
-        var t = new Task(this, newT, false);
+        var t = new Task(this, newT, false, ()=> {
+            this.changeCount();
+        });
         this.tasks.push(t);
         this.template.parentNode.appendChild(t.task); // Вставляем объект
         this.changeCount();
@@ -137,17 +136,16 @@ class TodoList {
      * @returns {TodoList}
      */
     addListnerDelTodo() {
-        var t = this;
         var dItem = this.list.querySelector('.del-todo-list');
         if (!dItem) {
             return this;
         }
-        dItem.addEventListener('click', function () {
+        dItem.addEventListener('click',  () =>{
             var i = document.querySelectorAll('.body-todo-list').length;
             if (i <= 1) {
-                t.createNewTodo('new_list');
+                this.createNewTodo('new_list');
             }
-            t.list.parentNode.removeChild(t.list);
+            this.list.parentNode.removeChild(this.list);
         });
 
 
@@ -159,13 +157,12 @@ class TodoList {
      * @returns {TodoList}
      */
     addListnerButtonClear() {
-        var t = this;
         var clButton = this.list.querySelector('.button-clear-complite');
         if (!clButton) {
             return this;
         }
-        clButton.addEventListener('click', function () {
-            t.clearComplite();
+        clButton.addEventListener('click', () => {
+            this.clearComplite();
         });
 
         return this;
@@ -244,11 +241,11 @@ class TodoList {
      * @returns {TodoList}
      */
     addListnerNewTodoList() {
-        var t = this;
+
         var clButton = this.list.querySelectorAll('.new-list-button');
         for (var i = 0; i < clButton.length; i++) {
-            clButton[i].addEventListener('click', function () {
-                t.createNewTodo(this.value);
+            clButton[i].addEventListener('click',  (but) =>{
+                this.createNewTodo(but.target.value);
 
             });
         }

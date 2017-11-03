@@ -1,7 +1,7 @@
 'use strict';
 
 class Task {
-    constructor(todo, taskName, checked) {
+    constructor(todo, taskName, checked, callback) {
         this.todo = todo;
         this.isCheck = checked;
         this.task = todo.template.cloneNode(true);
@@ -14,6 +14,7 @@ class Task {
 
         this.addListnerCheckTodo();
         this.addListnerDelLine();
+        this.callback = callback;
     }
 
     get taskNode() {
@@ -71,15 +72,14 @@ class Task {
      * @returns {TodoList}
      */
     addListnerCheckTodo() {
-        var t = this;
         if (!this.checkBox) {
             return this;
 
         }
-        this.checkBox.addEventListener('click', function () {
-            var itemLabel = this.closest('.task-todo-item').querySelector('.task-todo-item__label');
+        this.checkBox.addEventListener('click',  () =>{
+            var itemLabel = this.task.querySelector('.task-todo-item__label');
             itemLabel.classList.toggle('.task-todo-item__label-complite');
-            t.checkBoxStatus = this.checked;
+            this.checkBoxStatus = this.checkBox.checked;
         });
 
         return this;
@@ -92,12 +92,10 @@ class Task {
      * @returns {TodoList}
      */
     addListnerDelLine() {
-        var t = this;
         var dItem = this.task.querySelectorAll('.task__del-item-button');
         for (var i = 0; i < dItem.length; i++) {
-            dItem[i].addEventListener('click', function () {
-                t.deleteTask();
-                t.todo.changeCount();
+            dItem[i].addEventListener('click', () => {
+                this.deleteTask();
             });
         }
 
@@ -108,6 +106,7 @@ class Task {
         if (this.task.parentNode) {
             this.task.parentNode.removeChild(this.task);
         }
+        this.callback();
     }
 
 
